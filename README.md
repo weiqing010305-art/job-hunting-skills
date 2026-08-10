@@ -25,10 +25,19 @@
 
 ## 安装
 
-把本仓库整体放到你的 skills 目录下（保持 `SKILL.md` 在根、`modules/` 在下）：
+方式一：git clone（推荐，便于后续 `git pull` 更新）
 
-- WorkBuddy：`~/.workbuddy/skills/job-hunting/`
-- Claude Code：`~/.claude/skills/job-hunting/`
+- **WorkBuddy**：
+  ```bash
+  git clone https://github.com/weiqing010305-art/job-hunting-skills.git ~/.workbuddy/skills/job-hunting
+  ```
+- **Claude Code**：
+  ```bash
+  git clone https://github.com/weiqing010305-art/job-hunting-skills.git ~/.claude/skills/job-hunting
+  ```
+
+方式二：手动复制
+把本仓库的 `SKILL.md` 与 `modules/` 整体复制到上述 `skills/job-hunting/` 目录下（保持 `SKILL.md` 在根、`modules/` 在下）即可。
 
 调用时只需说「模拟面试 / 改简历 / 面经 / 谈薪…」，主编排器 `SKILL.md` 会按意图路由到对应模块。
 
@@ -39,6 +48,17 @@
 ## 致谢
 
 本套件整合自以下开源项目（按其 LICENSE 使用）：ResumeSkills、MadsLorentzen/ai-job-search、Anthropic interview-coach、KunChen1110/InterviewRadar、thekarananand/ATS-Breaker、wanyichen06/LLMInternSkill、JinzeWang10/resume-coach、jennifer88huang/interview-skills。
+
+## English
+
+**job-hunting** is a curated, router-style bundle of 8 open-source job-search skills, covering the full loop: resume optimization → automated applying → general mock interviews → big-tech targeted mocks → weakness tracking → real interview-question prep → technical / AI-intern scoring → salary negotiation.
+
+Drop the repo into your skills directory:
+
+- WorkBuddy: `~/.workbuddy/skills/job-hunting`
+- Claude Code: `~/.claude/skills/job-hunting`
+
+The root `SKILL.md` acts as a router and dispatches each request to the right module (see the module table above). Everything is prompt/markdown only — no external network calls, no fabricated experience. MIT licensed.
 
 ## License
 

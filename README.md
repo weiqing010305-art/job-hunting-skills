@@ -73,9 +73,22 @@
 
 不编造项目、指标、职责。遇要求虚构，直接拒绝。
 
-## 致谢
+## 致谢与第三方许可
 
-本套件整合自以下开源项目（按其 LICENSE 使用）：ResumeSkills、MadsLorentzen/ai-job-search、Anthropic interview-coach、KunChen1110/InterviewRadar、thekarananand/ATS-Breaker、wanyichen06/LLMInternSkill、JinzeWang10/resume-coach、jennifer88huang/interview-skills。
+本套件整合了以下开源项目，版权归各自原作者，按其许可证使用（7 个为 MIT；ats-breaker 未声明许可证，见下方说明与 [THIRD-PARTY.md](THIRD-PARTY.md)）：
+
+| 模块 | 原作者 / 仓库 | 许可证 | 来源链接 |
+|---|---|---|---|
+| resume-optimization | Paramchoudhary / ResumeSkills | MIT | https://github.com/Paramchoudhary/ResumeSkills |
+| ai-job-search | MadsLorentzen / ai-job-search | MIT | https://github.com/MadsLorentzen/ai-job-search |
+| interview-coach | noamseg / interview-coach-skill（基于 Anthropic interview-coach） | MIT | https://github.com/noamseg/interview-coach-skill |
+| interview-radar | KunChen1110 / InterviewRadar | MIT | https://github.com/KunChen1110/InterviewRadar |
+| ats-breaker | thekarananand / ats-breaker | ⚠️ 未声明许可证 | https://github.com/thekarananand/ats-breaker |
+| llm-intern | wanyichen06 / LLMInternSkill | MIT | https://github.com/wanyichen06/LLMInternSkill |
+| resume-coach | JinzeWang10 / resume-coach | MIT | https://github.com/JinzeWang10/resume-coach |
+| interview-skills | jennifer88huang / interview-skills | MIT | https://github.com/jennifer88huang/interview-skills |
+
+本仓库的整合编排部分（根目录 `SKILL.md` 路由器、`README.md`、模块整合与路由设计）版权归 **微青**，按 MIT 授权；`modules/` 下各子模块版权归各自原作者，不受本仓库根 LICENSE 的版权声明约束。
 
 ## English
 
@@ -86,7 +99,7 @@ Drop the repo into your skills directory:
 - WorkBuddy: `~/.workbuddy/skills/job-hunting`
 - Claude Code: `~/.claude/skills/job-hunting`
 
-The root `SKILL.md` acts as a router and dispatches each request to the right module (see the module table above). Everything is prompt/markdown only — no external network calls, no fabricated experience. MIT licensed.
+The root `SKILL.md` acts as a router and dispatches each request to the right module (see the module table above). Everything is prompt/markdown only — no external network calls, no fabricated experience. The curation in this repo (router `SKILL.md`, `README.md`) is MIT licensed; each bundled module keeps its own license — see [THIRD-PARTY.md](THIRD-PARTY.md).
 
 ## License
 

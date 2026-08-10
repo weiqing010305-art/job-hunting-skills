@@ -1,0 +1,12 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+
+# build / deps
+__pycache__/
+node_modules/
+*.pyc
+
+# local artifacts
+*.zip

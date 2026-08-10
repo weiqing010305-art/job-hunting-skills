@@ -17,6 +17,34 @@
 | `resume-coach` | JinzeWang10/resume-coach | 跨会话弱点累积追踪 + 简历打磨反向引用弱点 + 中国初创 research scout |
 | `interview-skills` | jennifer88huang/interview-skills | 大厂定向题库（阿里/腾讯/字节/Google…）+ 好答案vs差答案 + HR面 + 薪资谈判 + 多轮连贯模拟 |
 
+## 各模块怎么发挥作用
+
+每个模块都是一份独立的方法论文档，主编排器按你一句话的意图把它们接进来。下面讲清楚每个模块**实际怎么干活**。
+
+### resume-optimization — 简历优化的底盘
+你贴简历（可选带 JD），它按七步走：JD 匹配分析 → bullet 量化改写 → ATS 兼容检查 → 按 JD 定制 → 求职信 → LinkedIn → offer 对比。核心是 **X-Y-Z 公式**（做成了什么 X / 用什么数字衡量 Y / 怎么做的 Z），每条 bullet 强制带 ≥1 个量化数字；再用 **Match Score**（命中关键词 ÷ JD 必需关键词）和 ATS 清单（不用表格 / 图片 / 页眉）保证机器筛得过。全套件其他模块的简历需求都先回这里。
+
+### ai-job-search — 真出 PDF 的投岗工程
+不是自动点「申请」的机器人。它跑一条本地流水线：`/scrape` 爬职位 → `/rank` 按 5 维 + 地点硬过滤批量打分排序 → `/apply` 对**单个**职位用 **Drafter–Reviewer 双 Agent** 起草 LaTeX CV + 求职信、互相挑刺修订、编译成真实 PDF，再用 `pdftotext` 抽文本层做 ATS 校验，**最后呈现给你由人提交**。偏英文 / 海外岗；爬站有 ToS + 翻墙风险，简历数据会进 git。
+
+### interview-coach — 会越练越准的面试教练
+地基是 **STAR 故事银行**（每条经历存成带「earned secrets」和 fit 等级的故事，避免多题抢同一个）。每次模拟面试打 **5 维分**（内容 / 结构 / 相关 / 可信 / 差异），映射到 root cause 派 drill。最高阶是 **校准引擎**：真实面 ≥3 场后比对「我内部给的分」vs「真实反馈」，外部反馈权重更大，越面越准而不是自我感觉良好。靠一个 `coaching_state.md` 做跨会话记忆，无代码依赖。
+
+### interview-radar — 抓真实中文面经并锚定到你简历
+从「简历 + 一句岗位方向」出发，迭代检索牛客 / 小红书 / GitHub 真实面经，按 **独立来源数 × 时效** 排序（≥2 个独立来源才算高频题，防单一帖误判），时效硬过滤保留近 730 天。核心是 **项目锚定**：每道高频题必须能同时追溯到「你的简历项目 / 技能」+「真实爬到的题」，否则降为通用八股题；输出固定 10 节备考包，每题可点回原帖。⚠️ 抓小红书需 MediaCrawler + 登录 + 翻墙，有 ToS 风险（你已确认接受）。
+
+### ats-breaker — 技术 / 实习简历的 /120 分硬核体检
+你给简历路径（它**绝不自己扫文件系统**），它用 `gh` 抓你 GitHub 贡献当证据，按四类评分卡（open_source / self_projects / production / technical_skills，封顶 120）逐点加分扣分，**分数机器校验不超上限**。铁律：绝不按姓名 / 性别 / 学校 / GPA 打分，只评可验证工程证据；低于 80 建议先别投。是 resume-optimization 的「技术实习专项插件」。
+
+### llm-intern — AI / LLM 实习简历的「证据闸门」
+给冲 LLM / AI 实习岗的人用。每条 claim 按 **C0–C3 证据等级** 定级（C3 必须有指标定义与记录，否则不许写），等级不够直接拦下。再检测 12 类 AI role type（rag / agent / posttraining…）做 fit 判定，然后 **5 轮面试拷打** 把 claim 转成「回答卡」（危险 / 及格 / 强 / 需补证据），最后用 **Project Scout** 推荐能补证据的开源项目——但学开源 ≠ 伪造成工作经历。纯 prompt，无代码依赖。
+
+### resume-coach — 简历常驻 + 弱点跨会话累积
+四个模式共享一份**写在磁盘上的状态**：interview（基于你简历出 grounded 的模拟题）、polish（改简历，A 级建议必须 cite 具体历史 session）、debrief（看练得怎么样、弱点排行）、scout（只研究中国初创公司、绝不替你投递）。关键护城河是**本地常驻**：简历、历史 transcript、弱点累积都存在 `~/.claude/resume-coach-data/`，SaaS / 网页 ChatGPT 做不到。八条不变量里最硬的三条：永不覆盖原简历、永不替你 git 提交、面试题必须挂在简历具体 bullet 上。
+
+### interview-skills — 大厂定向模拟面试官
+你给公司 + 岗位 + JD + 简历，它先**解析 JD 和简历**，再**匹配公司风格**（字节范 / 阿里味 / 腾讯味 / Google / Meta / Amazon…），然后生成 10 道针对性题（技术基础 + 项目深挖 + 行为面 + 反问预测），每题带难度、参考提示、追问方向。支持四种专项：**好 / 差答案对比**、**HR 面**、**薪资谈判话术**、**多轮连贯模拟**（一面 → 二面 → 三面 → HR，后轮继承前轮暴露的强弱点）。覆盖阿里 / 腾讯 / 字节 / 百度 / 美团 / 京东 / 华为 / 滴滴 / 拼多多 + Google / Meta / Amazon / Microsoft 等。
+
 ## 去重原则（套件铁律）
 
 - `resume-optimization` 是简历优化的**唯一权威版**，其他模块不重述 bullet 量化 / ATS 基础检查。
